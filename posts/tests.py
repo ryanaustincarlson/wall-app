@@ -201,24 +201,25 @@ class PostsTests(APITestCase):
 
         self.assertEqual(len(Post.objects.all()), 1)
 
-    def test_create_then_get_wallpost(self):
+    def test_create_then_get_then_patch_then_get_wallpost(self):
         '''
             Exercise each part of the API...
 
             Create a wall post using the API, then get all wall posts.
-            Then get each wall post individually.
-            Then delete a wall post.
+            Then get a specific wall post.
+            Update that wall post.
+            Finally, delete that wall post.
         '''
         self.client.force_login(self.user)
 
-        url = reverse('post-list')
+        list_url = reverse('post-list')
         post_texts = [
             'first post',
             'second post',
         ]
 
         for post_text in post_texts:
-            post_response = self.client.post(url, {'text': post_text}, format='json')
+            post_response = self.client.post(list_url, {'text': post_text}, format='json')
             self.assertEqual(post_response.status_code, status.HTTP_201_CREATED)
 
         # check that post text in db is expected
@@ -232,8 +233,28 @@ class PostsTests(APITestCase):
         self.client.logout()
 
         # now check that the post-list route returns appropriate data
-        response = self.client.get(url, format='json')
+        response = self.client.get(list_url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), len(post_texts))
         for response_post, post_text in zip(response.data, post_texts):
             self.assertEqual(response_post['text'], post_text)
+
+        wallpost = Post.objects.all()[0]
+        detail_url = reverse('post-detail', args=[wallpost.id])
+        response = self.client.get(detail_url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['text'], wallpost.text)
+
+        self.client.force_login(self.user)
+
+        updated_text = 'new, text. way better.'
+        self.client.patch(detail_url, {'text': updated_text})
+
+        wallpost = Post.objects.get(id=wallpost.id)
+        self.assertEqual(wallpost.text, updated_text)
+
+        self.client.delete(detail_url)
+        with self.assertRaises(Post.DoesNotExist):
+            Post.objects.get(id=wallpost.id)
+
+        self.assertEqual(len(Post.objects.all()), len(post_texts) - 1)
