@@ -17,12 +17,14 @@ define(['angular'], function(angular) {
             init: init,
             create: create,
             remove: remove,
+            update: update,
             whoami: whoami,
         };
 
         function init(options)
         {
-            _addHandlersToRequest($http.get('/api/posts'), options);
+            _addHandlersToRequest($http.get('/api/posts'), options,
+                                  'Initialization failed!');
         }
 
         function create(options)
@@ -30,26 +32,35 @@ define(['angular'], function(angular) {
             var text = options.text;
             _addHandlersToRequest($http.post('/api/posts/', {
                 text: text
-            }), options);
+            }), options, 'Could not create new post');
         }
 
         function remove(options)
         {
             var url = options.post.url || '/api/posts/' + options.post.id + '/';
-            _addHandlersToRequest($http.delete(url), options);
+            _addHandlersToRequest($http.delete(url), options, 'Could not remove post');
+        }
+
+        function update(options)
+        {
+            var url = options.post.url || '/api/posts/' + options.post.id + '/';
+            _addHandlersToRequest($http.patch(url, {
+                text: options.post.text,
+            }), options, 'Could not update post');
         }
 
         function whoami(options)
         {
             var url = '/api/whoami';
-            _addHandlersToRequest($http.get(url), options);
+            _addHandlersToRequest($http.get(url), options, 'Could not find current user');
         }
 
-        function _addHandlersToRequest(request, options)
+        function _addHandlersToRequest(request, options, errMsg)
         {
+            var errAlert = function() { alert(errMsg); }
             request.then(
                 (options.success || angular.noop),
-                (options.error || angular.noop)
+                (options.error || (errMsg ? errAlert : angular.noop))
             );
         }
     }

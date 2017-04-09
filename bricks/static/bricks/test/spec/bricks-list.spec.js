@@ -3,12 +3,14 @@ define(['angular', 'bricks-list/bricks-list.controller', 'angularMocks'], functi
 
     var FAKE_DATA = [
         {
+            id: 1,
             text: 'text.1',
             author: 'author.1',
             author_url: 'http://domain.com/users/1',
             created: '2017-03-28T01:40:17.649481Z',
         },
         {
+            id: 2,
             text: 'text.2',
             author: 'author.2',
             author_url: 'http://domain.com/users/2',
@@ -39,7 +41,10 @@ define(['angular', 'bricks-list/bricks-list.controller', 'angularMocks'], functi
     var FAKE_NETWORK_SERVICE = {
         remove: function(opts) {
             opts.success({});
-        }
+        },
+        update: function(opts) {
+            opts.success({data: opts.post});
+        },
     };
 
     describe('bricks list controller', function() {
@@ -85,6 +90,25 @@ define(['angular', 'bricks-list/bricks-list.controller', 'angularMocks'], functi
             expect($scope.getCurrentUser()).toBeNull();
             CURRENT_USER = 'mario';
             expect($scope.getCurrentUser()).toEqual('mario');
-        })
+        });
+
+        it('updates an existing post\'s text', function() {
+            var updated = angular.copy(FAKE_DATA_SORTED[0]);
+            var textUpdate = 'some awesome new text';
+            updated.metadata = {
+                textUpdate: textUpdate,
+                editing: true,
+            };
+            $scope.updatePost(updated);
+
+            var expected = angular.copy(FAKE_DATA_SORTED);
+            expected[0].text = textUpdate;
+
+            expect($scope.posts).toEqual(expected);
+            expect(updated.metadata).toEqual({
+                textUpdate: null,
+                editing: false
+            });
+        });
     })
 });

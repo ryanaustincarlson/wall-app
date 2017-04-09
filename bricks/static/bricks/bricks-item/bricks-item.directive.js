@@ -11,7 +11,9 @@ define(['angular', './bricks-item.controller'], function(angular, BricksItemCtrl
             scope: {
                 item: '=',
                 itemRemover: '&',
+                itemUpdater: '&',
                 showAuthor: '=',
+                currentUser: '=',
             },
             templateUrl: '/static/bricks/bricks-item/bricks-item.html',
             controller: BricksItemCtrl,

@@ -59,6 +59,29 @@ define(['angular', 'bricks-services'], function(angular) {
             });
         }
 
+        $scope.updatePost = function(post)
+        {
+            var updatedPost = angular.copy(post);
+            updatedPost.text = updatedPost.metadata.textUpdate;
+            BricksNetworkService.update({
+                post: updatedPost,
+                success: function(response)
+                {
+                    debugger;
+                    for (var i=0; i<$scope.posts.length; i++)
+                    {
+                        if ($scope.posts[i].id === response.data.id)
+                        {
+                            $scope.posts[i].text = response.data.text;
+                        }
+                    }
+
+                    post.metadata.textUpdate = null;
+                    post.metadata.editing = false;
+                }
+            });
+        }
+
         $scope.filterByAuthor = function(post)
         {
             if (!$scope.author) { return true; }

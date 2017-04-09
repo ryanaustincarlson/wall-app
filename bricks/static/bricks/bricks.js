@@ -33,8 +33,7 @@ function(angular) {
         $stateProvider.state(posts);
         $stateProvider.state(author);
 
-        // $locationProvider.hashPrefix('');
-        // $urlRouterProvider.otherwise('/');
-        // $locationProvider.html5Mode(true);
+        $locationProvider.hashPrefix('');
+        $urlRouterProvider.otherwise('/');
     }]);
 });

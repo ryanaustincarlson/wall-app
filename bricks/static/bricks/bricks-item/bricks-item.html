@@ -1,9 +1,18 @@
 <div>
-    <div class="pull-right">
-        <span ng-click="itemRemover()(item)" class="glyphicon glyphicon-remove"></span>
-    </div>
     <div>
-        <h2 style="display:inline;">{{item.text}}</h2>
+        <h2 style="display:inline;">
+            <div ng-show="!item.metadata.editing">{{item.text}}</div>
+            <form class="form-group" ng-submit="itemUpdater()(item)" ng-show="item.metadata.editing">
+                <input type="text" placeholder="Update your post" ng-model="item.metadata.textUpdate" class="form-control">
+            </form>
+        </h2>
+        <div ng-show="item.author == currentUser" class="pull-right">
+            <span ng-click="toggleEditing()" 
+                  class="glyphicon"
+                  ng-class="item.metadata.editing ? 'glyphicon-ban-circle' : 'glyphicon-pencil'">
+            </span>
+            <span ng-click="itemRemover()(item)" class="glyphicon glyphicon-remove"></span>
+        </div>
     </div>
     <div>
         <div ng-if="showAuthor" style="display:inline;">
