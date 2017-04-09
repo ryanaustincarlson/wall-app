@@ -1,23 +1,22 @@
+
 <div>
-    <div>
-        <h2 style="display:inline;">
-            <div ng-show="!item.metadata.editing">{{item.text}}</div>
-            <form class="form-group" ng-submit="itemUpdater()(item)" ng-show="item.metadata.editing">
-                <input type="text" placeholder="Update your post" ng-model="item.metadata.textUpdate" class="form-control">
-            </form>
-        </h2>
-        <div ng-show="item.author == currentUser" class="pull-right">
-            <span ng-click="toggleEditing()" 
-                  class="glyphicon"
-                  ng-class="item.metadata.editing ? 'glyphicon-ban-circle' : 'glyphicon-pencil'">
-            </span>
-            <span ng-click="itemRemover()(item)" class="glyphicon glyphicon-remove"></span>
-        </div>
+    <div class="post-text">
+        <div ng-show="!item.metadata.editing">{{item.text}}</div>
+        <form class="form-group" ng-submit="itemUpdater()(item)" ng-show="item.metadata.editing">
+            <input type="text" placeholder="Update your post" ng-model="item.metadata.textUpdate" class="form-control">
+        </form>
     </div>
-    <div>
-        <div ng-if="showAuthor" style="display:inline;">
-            <a ui-sref="author({ author: item.author })">{{item.author}}</a>, 
-        </div>
-        <i>{{item.created | date:'HH:mm on LLLL dd, yyyy'}}</i>
+    <div ng-show="item.author == currentUser" class="pull-right">
+        <span ng-click="toggleEditing()" 
+              class="glyphicon"
+              ng-class="item.metadata.editing ? 'glyphicon-ban-circle' : 'glyphicon-pencil'">
+        </span>
+        <span ng-click="itemRemover()(item)" class="glyphicon glyphicon-remove"></span>
     </div>
+</div>
+<div>
+    <span ng-if="showAuthor">
+        <a ui-sref="author({ author: item.author })">{{item.author}}</a>, 
+    </span>
+    <i>{{item.created | date:'HH:mm on LLLL dd, yyyy'}}</i>
 </div>
