@@ -258,3 +258,17 @@ class PostsTests(APITestCase):
             Post.objects.get(id=wallpost.id)
 
         self.assertEqual(len(Post.objects.all()), len(post_texts) - 1)
+
+    def test_current_user_noauth(self):
+        ''' get current user, but none logged in '''
+        url = reverse('whoami')
+        response = self.client.get(url)
+        self.assertEqual(response.data['username'], '')
+
+    def test_current_user_auth(self):
+        ''' get current user, logged in '''
+        self.client.force_login(self.user)
+        url = reverse('whoami')
+        response = self.client.get(url)
+        self.assertGreater(len(self.user.username), 0)
+        self.assertEqual(response.data['username'], self.user.username)

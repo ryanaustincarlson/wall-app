@@ -4,6 +4,8 @@ from posts.serializers import PostSerializer, UserSerializer
 from django.contrib.auth.models import User
 
 from rest_framework import permissions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from posts.permissions import IsOwnerOrReadOnly
 
@@ -27,3 +29,9 @@ class PostViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+@api_view(['GET'])
+def get_current_user(request):
+    serializer = UserSerializer(request.user, context={'request': request})
+    return Response({'username': serializer.data['username']})

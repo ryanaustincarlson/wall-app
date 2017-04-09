@@ -16,5 +16,6 @@ router.register(r'users', views.UserViewSet)
 urlpatterns = [
     url('^schema/$', schema_view),
     url(r'^auth/', include('rest_framework.urls')),
+    url(r'^whoami/', views.get_current_user, name='whoami'),
     url(r'^', include(router.urls)),
 ]
