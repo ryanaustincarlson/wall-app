@@ -1,0 +1,12 @@
+{% extends "registration/base.html" %}
+{% block title %}Account Details{% endblock %}
+{% block head %}Account Details{% endblock %}
+{% block content %}
+    {% if user.username %}
+        <p>You are currently logged in as <b>{{ user.username }}</b>.</p>
+        <a href="{% url 'login:logout' %}{% if next %}?next={{ next }}{% endif %}">Logout</a>
+    {% else %}
+        <p>You are not currently logged in.</p>
+        <a href="{% url 'login:login' %}?next={% if next %}{{ next }}{% else %}{% url 'login:whoami' %}{% endif %}">Login</a>
+    {% endif %}
+{% endblock %}

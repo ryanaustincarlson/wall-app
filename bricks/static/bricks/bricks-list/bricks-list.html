@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <form class="form-group" ng-submit="addPost()" ng-show="!author && getCurrentUser()">
+        <input type="text" placeholder="What's up?" ng-model="newPostText" class="form-control">
+    </form>
+    <h1 ng-if="author">{{author}}</h1>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="post in posts | filter:filterByAuthor">
+            <div bricks-item item="post" 
+                 item-remover="removePost"
+                 show-author="displayItemAuthor">
+            </div>
+        </li>
+    </ul>
+</div>

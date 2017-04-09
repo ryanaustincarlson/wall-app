@@ -1,0 +1,19 @@
+{% extends "registration/base.html" %}
+{% block title %}User Registration{% endblock %}
+{% block head %}User Registration{% endblock %}
+{% block content %}
+<form method="post" action="{% url 'login:register' %}{% if next %}?next={{ next }}{% endif %}">{% csrf_token %}
+    {% for field in form %}
+    <span class="errors">
+        {{ field.errors }}
+    </span>
+    <input id='{{ field.id_for_label }}'
+           name='{{ field.html_name }}'
+           type='{{ field.field.widget.input_type }}'
+           placeholder='{{ field.label }}'><br>
+    {% endfor %}
+    <button type="submit" class='btn btn-primary'>Register</button>
+</form>
+or<br>
+<a href="{% url 'login:login' %}{% if next %}?next={{ next }}{% endif %}">Login</a>
+{% endblock %}

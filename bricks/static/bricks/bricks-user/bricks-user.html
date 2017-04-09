@@ -1,0 +1,9 @@
+<div ng-if="initialized">
+    <span ng-show="author">
+        Welcome, {{author}}!
+        <a href="/accounts/logout?next=/wall">Logout</a>
+    </span>
+    <span ng-hide="author">
+        <a href="/accounts/login?next=/wall">Log In</a> to write a post.
+    </span>
+</div>

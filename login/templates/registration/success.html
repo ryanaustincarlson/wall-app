@@ -1,0 +1,9 @@
+{% extends "registration/base.html" %}
+{% block title %}Registration Successful{% endblock %}
+{% block head %}
+ Registration Completed Successfully
+{% endblock %}
+{% block content %}
+    Thank you for registering.
+    <a href="{% url 'login:login' %}{% if next %}?next={{ next }}{% endif %}">Login</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+<div>
+    <div class="pull-right">
+        <span ng-click="itemRemover()(item)" class="glyphicon glyphicon-remove"></span>
+    </div>
+    <div>
+        <h2 style="display:inline;">{{item.text}}</h2>
+    </div>
+    <div>
+        <div ng-if="showAuthor" style="display:inline;">
+            <a ui-sref="author({ author: item.author })">{{item.author}}</a>, 
+        </div>
+        <i>{{item.created | date:'HH:mm on LLLL dd, yyyy'}}</i>
+    </div>
+</div>

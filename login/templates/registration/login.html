@@ -1,0 +1,20 @@
+{% extends "registration/base.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}Login{% endblock %}
+{% block content %}
+<span class="errors">
+    {% if form.errors %}
+    <p style="color:red;">Your username and password didn't match. Please try again.</p>
+    {% endif %}
+</span>
+<form method="post" action="{% url 'login:login' %}{% if next %}?next={{ next }}{% endif %}">{% csrf_token %}
+    <input id='id_username' name='username' type='text' placeholder="Email"><br>
+    <input id='id_password' name='password' type='password' placeholder="Password"><br>
+    <button type="submit" class='btn btn-primary'>Login</button>
+    <input type="hidden"
+           name="next"
+           value="{% if next %}{{ next }}{% else %}{% url 'post-list' %}{% endif %}" />
+</form>
+or<br>
+<a href="{% url 'login:register' %}{% if next %}?next={{ next }}{% endif %}">Register for an Account</a>
+{% endblock %}
