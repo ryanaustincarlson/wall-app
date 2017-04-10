@@ -1,9 +1,22 @@
-define(['angular', 'bricks-services'], function(angular) {
+define(['angular', 'bricks-services'],
+function(angular, BricksListCtrl) {
     'use strict';
 
-    angular
-    .module('BricksListCtrl', ['BricksDataService', 'BricksNetworkService'])
-    .controller('BricksListCtrl', BricksListCtrl);
+    var module = angular.module('BricksList', ['BricksNetworkService']);
+    module.directive('bricksList', bricksList);
+    module.controller('BricksListCtrl', BricksListCtrl);
+
+    function bricksList()
+    {
+        return {
+            scope: {
+                'author': '=',
+            },
+            templateUrl: '/static/bricks/bricks-list/bricks-list.html',
+            controller: BricksListCtrl,
+            // restrict: 'E',
+        };
+    }
 
     BricksListCtrl.$inject = ['$scope', 'BricksDataService', 'BricksNetworkService'];
     function BricksListCtrl($scope, BricksDataService, BricksNetworkService) {
@@ -90,6 +103,4 @@ define(['angular', 'bricks-services'], function(angular) {
 
         $scope.getCurrentUser = BricksDataService.getCurrentUser;
     }
-
-    return BricksListCtrl;
 });

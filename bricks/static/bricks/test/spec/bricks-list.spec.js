@@ -1,4 +1,4 @@
-define(['angular', 'bricks-list/bricks-list.controller', 'angularMocks'], function(angular) {
+define(['angular', 'bricks-list/bricks-list', 'angularMocks'], function(angular) {
     'use strict';
 
     var FAKE_DATA = [
@@ -48,7 +48,7 @@ define(['angular', 'bricks-list/bricks-list.controller', 'angularMocks'], functi
     };
 
     describe('bricks list controller', function() {
-        beforeEach(module('BricksListCtrl'));
+        beforeEach(module('BricksList'));
 
         var $controller;
         var $scope;

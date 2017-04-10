@@ -1,8 +1,8 @@
-define(['angular', 'bricks-item/bricks-item.controller', 'angularMocks'], function(angular) {
+define(['angular', 'bricks-item/bricks-item', 'angularMocks'], function(angular) {
     'use strict';
 
     describe('bricks item controller', function() {
-        beforeEach(module('BricksItemCtrl'));
+        beforeEach(module('BricksItem'));
 
         var $controller;
         var $scope;

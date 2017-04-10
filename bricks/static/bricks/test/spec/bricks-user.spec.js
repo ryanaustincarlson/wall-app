@@ -9,7 +9,7 @@ define(['angular', 'bricks-user/bricks-user', 'angularMocks'], function(angular)
     }
 
     describe('bricks user controller', function() {
-        beforeEach(module('bricksUser'));
+        beforeEach(module('BricksUser'));
 
         var $controller;
         var $scope;

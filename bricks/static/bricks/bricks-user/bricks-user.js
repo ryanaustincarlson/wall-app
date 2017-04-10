@@ -2,7 +2,7 @@ define(['angular', 'bricks-services'], function(angular) {
     'use strict';
 
     var module = angular
-    .module('bricksUser', ['BricksDataService']);
+    .module('BricksUser', ['BricksDataService']);
 
     module.directive('bricksUser', bricksUser);
     module.controller('BricksUserCtrl', BricksUserCtrl);
@@ -30,6 +30,4 @@ define(['angular', 'bricks-services'], function(angular) {
             },
         });
     }
-
-    return bricksUser;
 })

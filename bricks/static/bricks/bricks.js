@@ -6,12 +6,9 @@ function(angular) {
     var bricksApp = angular.module('bricksApp', [
         'ui.router',
 
-        'bricksList',
-        'BricksListCtrl',
-        'bricksItem',
-        'BricksItemCtrl',
-        'bricksUser',
-        // 'BricksUserCtrl',
+        'BricksList',
+        'BricksItem',
+        'BricksUser',
     ]);
 
     bricksApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function($stateProvider, $locationProvider, $urlRouterProvider) {
