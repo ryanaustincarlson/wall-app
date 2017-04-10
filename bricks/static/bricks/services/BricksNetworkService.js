@@ -23,7 +23,7 @@ define(['angular'], function(angular) {
 
         function init(options)
         {
-            _addHandlersToRequest($http.get('/api/posts'), options,
+            _addHandlersToRequest($http.get('/api/posts/'), options,
                                   'Initialization failed!');
         }
 
@@ -51,7 +51,7 @@ define(['angular'], function(angular) {
 
         function whoami(options)
         {
-            var url = '/api/whoami';
+            var url = '/api/whoami/';
             _addHandlersToRequest($http.get(url), options, 'Could not find current user');
         }
 

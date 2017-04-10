@@ -48,7 +48,7 @@ define(['angular', 'bricks-list/bricks-list.controller', 'angularMocks'], functi
     };
 
     describe('bricks list controller', function() {
-        beforeEach(module('BricksListCtrl'))
+        beforeEach(module('BricksListCtrl'));
 
         var $controller;
         var $scope;
