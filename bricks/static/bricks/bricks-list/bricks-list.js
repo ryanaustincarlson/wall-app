@@ -26,6 +26,7 @@ function(angular, BricksListCtrl) {
 
     BricksListCtrl.$inject = ['$scope', 'BricksDataService', 'BricksNetworkService'];
     function BricksListCtrl($scope, BricksDataService, BricksNetworkService) {
+        $scope.posts = [];
         BricksDataService.init({
             success: function(data) {
                 $scope.posts = data;
@@ -46,12 +47,19 @@ function(angular, BricksListCtrl) {
                 success: function(newPost)
                 {
                     // insert into sorted order
-                    for (var i=0; i<$scope.posts.length; i++)
+                    if ($scope.posts.length == 0)
                     {
-                        if ($scope.posts[i].created < newPost.created)
+                        $scope.posts.push(newPost);
+                    }
+                    else
+                    {
+                        for (var i=0; i<$scope.posts.length; i++)
                         {
-                            $scope.posts.splice(i, 0, newPost);
-                            break;
+                            if ($scope.posts[i].created < newPost.created)
+                            {
+                                $scope.posts.splice(i, 0, newPost);
+                                break;
+                            }
                         }
                     }
 

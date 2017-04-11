@@ -3,9 +3,12 @@
         <input type="text" placeholder="What's up?" ng-model="newPostText" class="form-control">
     </form>
     <h1 ng-if="author">{{author}}</h1>
+    <h3 ng-show="posts.length == 0">
+        No Posts Yet
+    </h3>
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="post in posts | filter:filterByAuthor">
-            <div bricks-item item="post" 
+            <div bricks-item item="post"
                  item-remover="removePost"
                  item-updater="updatePost"
                  show-author="displayItemAuthor"
