@@ -33,6 +33,7 @@ We have two test suites -- one for the django app (found in `posts/tests.py`) an
 angularjs app (found in `bricks/static/bricks/test/spec`). To run both of these tests, execute 
 `./run_tests.sh`
 
-To start the server, run `python manage.py runserver`.
+To start the server, run `python manage.py runserver`. Note that you may have to run `python manage.py migrate` first.
+
 
 That should be it. Happy wall-ing!
