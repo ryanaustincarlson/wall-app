@@ -7,6 +7,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
+from django.core.mail import send_mail
+
 
 @csrf_protect
 def register(request):
@@ -14,14 +16,23 @@ def register(request):
     if request.method == 'POST':
         form = login_forms.RegistrationForm(request.POST)
         if form.is_valid():
-            User.objects.create_user(
-                username=form.cleaned_data['email'],
+            new_user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                email=form.cleaned_data['email'],
                 password=form.cleaned_data['password1'],
             )
 
             success_url = reverse('login:register_success')
             if 'next' in context:
                 success_url += '?next={}'.format(context['next'])
+
+            send_mail(
+                'Welcome to Bricks (a simple wall app)',
+                'You successfully registered as {}.'.format(new_user.username),
+                'Bricks Admin <rcarlsontsl@gmail.com>',
+                [new_user.email],
+                fail_silently=False
+            )
 
             return HttpResponseRedirect(success_url)
     else:
