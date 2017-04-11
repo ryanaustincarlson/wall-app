@@ -30,7 +30,7 @@ require.config({
     ],
 
     paths: {
-        angular: '/base/bower_components/angular/angular',
+        angular: '/base/node_modules/angular/angular',
         angularMocks: '/base/node_modules/angular-mocks/angular-mocks',
     },
 

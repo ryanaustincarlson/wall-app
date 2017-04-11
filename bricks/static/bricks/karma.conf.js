@@ -17,7 +17,7 @@ module.exports = function(config) {
         files: [
             {pattern: 'bricks-*/*.js', included: false},
             {pattern: 'services/**/*.js', included: false},
-            {pattern: 'bower_components/**/*.js', included: false},
+            {pattern: 'node_modules/angular/*.js', included: false},
             {pattern: 'node_modules/angular-mocks/*.js', included: false},
             {pattern: 'test/**/*.js', included: false},
             {pattern: '*.js', included: false},

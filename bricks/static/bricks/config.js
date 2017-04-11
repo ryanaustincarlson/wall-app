@@ -1,16 +1,16 @@
 (function(require) {
     var root = '/static';
-    var bowerRoot = root + '/bricks/bower_components';
+    var libsRoot = root + '/bricks/node_modules';
 
     var mkPkg = function(name, route)
     {
         return {name: name, location: root + route};
     }
 
-    var mkBowerPath = function(path)
+    var mkLibsPath = function(path)
     {
         if (path.indexOf('/') != 0) { path = '/' + path; }
-        return bowerRoot + path;
+        return libsRoot + path;
     }
 
     require.config({
@@ -22,9 +22,9 @@
             mkPkg('bricks-services', '/bricks/services'),
         ],
         paths: {
-            'angular': mkBowerPath('angular/angular.min'),
-            'angular-ui-router': mkBowerPath('angular-ui-router/release/angular-ui-router.min'),
-            'js-cookie': mkBowerPath('js-cookie/src/js.cookie'),
+            'angular': mkLibsPath('angular/angular.min'),
+            'angular-ui-router': mkLibsPath('angular-ui-router/release/angular-ui-router.min'),
+            'js-cookie': mkLibsPath('js-cookie/src/js.cookie'),
         },
         shim: {
             'angular': {
