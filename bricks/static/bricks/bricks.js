@@ -3,6 +3,16 @@ define([
     'bricks-list', 'bricks-item', 'bricks-user'
 ],
 function(angular) {
+    'use strict';
+
+    /*
+     * This is the main definition of the app. It orchestrates the
+     * ui-router states and specifies what our URLs should look like.
+     * There are two states:
+     *      - home: show all posts, allow users to create new posts.
+     *      - author: show a single author's posts.
+     */
+
     var bricksApp = angular.module('bricksApp', [
         'ui.router',
 
@@ -12,7 +22,7 @@ function(angular) {
     ]);
 
     bricksApp.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function($stateProvider, $locationProvider, $urlRouterProvider) {
-        var posts = {
+        var home = {
             name: 'home',
             url: '/',
             template: '<div bricks-list></div>',
@@ -27,7 +37,7 @@ function(angular) {
             }],
         };
 
-        $stateProvider.state(posts);
+        $stateProvider.state(home);
         $stateProvider.state(author);
 
         $locationProvider.hashPrefix('');

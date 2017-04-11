@@ -2,6 +2,12 @@ define(['angular', 'bricks-services'],
 function(angular, BricksListCtrl) {
     'use strict';
 
+    /*
+     * Bricks List displays a list of posts ("bricks") that can
+     * optionally be filtered by author. If it's *not* being
+     * filtered by author, users can also make new posts to the wall.
+     */
+
     var module = angular.module('BricksList', ['BricksNetworkService']);
     module.directive('bricksList', bricksList);
     module.controller('BricksListCtrl', BricksListCtrl);

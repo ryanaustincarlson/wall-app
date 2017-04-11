@@ -1,6 +1,12 @@
 define(['angular', 'bricks-services'], function(angular) {
     'use strict';
 
+    /*
+     * Bricks User provides a link to the login/logout functionality.
+     * It queries the server for the current user and then displays
+     * an appropriate message to let them login or logout.
+     */
+
     var module = angular
     .module('BricksUser', ['BricksDataService']);
 

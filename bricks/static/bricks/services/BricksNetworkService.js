@@ -1,4 +1,13 @@
 define(['angular'], function(angular) {
+    'use strict';
+
+    /*
+     * The network service only knows how to make network requests
+     * and execute callbacks upon receiving a response. It doesn't
+     * care what the response looks like. It's pretty dumb, but
+     * we want the net service to focus on just this one little thing.
+     */
+
     var module = angular.module('BricksNetworkService', []);
 
     // setup cross site request forgery tokens for ajax calls to play

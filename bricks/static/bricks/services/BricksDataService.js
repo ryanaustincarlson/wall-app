@@ -1,5 +1,16 @@
 define(['angular', './BricksNetworkService'], function(angular) {
-    angular.module('BricksDataService', ['BricksNetworkService']).factory('BricksDataService', BricksDataService);
+    'use strict';
+
+    /*
+     * This data service serves as a middle-man between the network
+     * service and other controllers. It actually knows a bit about
+     * what data it's expecting, and where applicable will modify
+     * that data before handing it back to the caller.
+     */
+
+    angular
+    .module('BricksDataService', ['BricksNetworkService'])
+    .factory('BricksDataService', BricksDataService);
 
     BricksDataService.$inject = ['BricksNetworkService'];
     function BricksDataService(BricksNetworkService)

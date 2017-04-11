@@ -1,6 +1,12 @@
 define(['angular'], function(angular) {
     'use strict';
 
+    /*
+     * The brick item displays a single post (text, author, date)
+     * and houses a few callbacks to BricksList to remove & update
+     * a post's text.
+     */
+
     var module = angular.module('BricksItem', []);
     module.directive('bricksItem', bricksItem);
     module.controller('BricksItemCtrl', BricksItemCtrl);
