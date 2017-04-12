@@ -94,7 +94,6 @@ function(angular, BricksListCtrl) {
                 post: updatedPost,
                 success: function(response)
                 {
-                    debugger;
                     for (var i=0; i<$scope.posts.length; i++)
                     {
                         if ($scope.posts[i].id === response.data.id)
